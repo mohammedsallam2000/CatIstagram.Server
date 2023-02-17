@@ -17,7 +17,7 @@ namespace CatIstagram.Server.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return Ok("Worked success");
+            return Ok("Worked success !!!");
         }
 
  
