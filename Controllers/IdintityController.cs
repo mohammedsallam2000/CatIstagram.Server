@@ -42,7 +42,7 @@ namespace CatIstagram.Server.Controllers
             return BadRequest(result.Errors);
         }
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(RegisterRequestModel model)
+        public async Task<ActionResult<string>> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
             if (user == null)
