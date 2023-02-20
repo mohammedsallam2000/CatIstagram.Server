@@ -42,7 +42,7 @@ namespace CatIstagram.Server.Controllers
             return BadRequest(result.Errors);
         }
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginRequestModel model)
+        public async Task<IActionResult> Login(LoginRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.UserName);
             if (user == null)
@@ -68,7 +68,7 @@ namespace CatIstagram.Server.Controllers
             };
             var Token = TokenHandler.CreateToken(TokenDescription);
             var encryptedToken = TokenHandler.WriteToken(Token);
-            return encryptedToken;
+            return new JsonResult(encryptedToken) ;
         }
     }
 }
