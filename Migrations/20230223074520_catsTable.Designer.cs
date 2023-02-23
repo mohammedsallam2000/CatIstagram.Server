@@ -4,14 +4,16 @@ using CatIstagram.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CatIstagram.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230223074520_catsTable")]
+    partial class catsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace CatIstagram.Server.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CatIstagram.Server.Data.Entites.Cat", b =>
+            modelBuilder.Entity("CatIstagram.Server.Data.Models.Cat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,10 +45,10 @@ namespace CatIstagram.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Cats");
+                    b.ToTable("Cat");
                 });
 
-            modelBuilder.Entity("CatIstagram.Server.Data.Entites.user", b =>
+            modelBuilder.Entity("CatIstagram.Server.Data.Models.user", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -242,9 +244,9 @@ namespace CatIstagram.Server.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CatIstagram.Server.Data.Entites.Cat", b =>
+            modelBuilder.Entity("CatIstagram.Server.Data.Models.Cat", b =>
                 {
-                    b.HasOne("CatIstagram.Server.Data.Entites.user", "User")
+                    b.HasOne("CatIstagram.Server.Data.Models.user", "User")
                         .WithMany("Cats")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -264,7 +266,7 @@ namespace CatIstagram.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CatIstagram.Server.Data.Entites.user", null)
+                    b.HasOne("CatIstagram.Server.Data.Models.user", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -273,7 +275,7 @@ namespace CatIstagram.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CatIstagram.Server.Data.Entites.user", null)
+                    b.HasOne("CatIstagram.Server.Data.Models.user", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -288,7 +290,7 @@ namespace CatIstagram.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CatIstagram.Server.Data.Entites.user", null)
+                    b.HasOne("CatIstagram.Server.Data.Models.user", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -297,14 +299,14 @@ namespace CatIstagram.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CatIstagram.Server.Data.Entites.user", null)
+                    b.HasOne("CatIstagram.Server.Data.Models.user", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CatIstagram.Server.Data.Entites.user", b =>
+            modelBuilder.Entity("CatIstagram.Server.Data.Models.user", b =>
                 {
                     b.Navigation("Cats");
                 });

@@ -1,5 +1,5 @@
 using CatIstagram.Server.Data;
-using CatIstagram.Server.Data.Models;
+using CatIstagram.Server.Data.Entites;
 using CatIstagram.Server.Infratrucure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
