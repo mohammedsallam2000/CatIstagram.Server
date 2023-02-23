@@ -1,7 +1,7 @@
 ﻿using CatIstagram.Server.Data.Entites;
 using System.ComponentModel.DataAnnotations;
 using static CatIstagram.Server.Data.Validation.cat;
-namespace CatIstagram.Server.Data.Models.Cats
+namespace CatIstagram.Server.Features.Cats
 {
     public class CreateCatRequestModel
     {

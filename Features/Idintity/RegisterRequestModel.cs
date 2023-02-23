@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CatIstagram.Server.Data.Models.Identity
+namespace CatIstagram.Server.Features.Idintity
 {
     public class RegisterRequestModel
     {

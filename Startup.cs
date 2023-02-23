@@ -33,53 +33,60 @@ namespace CatIstagram.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            
+            var AppSettings = services.GetApplicationSettings(this.Configuration);
+
+            services
+                .AddDataBase(this.Configuration)
+                .AddIdentity()
+                .AddJWTAuthentication(AppSettings)
+                .applicationSevices()
+                .AddSwagger()
+                .AddControllers();
             //services.AddDatabaseDeveloperPageExceptionFilter();
 
 
             //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            services.AddIdentity<user, IdentityRole>(Options =>
-            {
-                Options.Password.RequireDigit = false;
-                Options.Password.RequireLowercase = false;
-                Options.Password.RequireUppercase = false;  
-                Options.Password.RequireLowercase = false;
-                Options.Password.RequireNonAlphanumeric = false;
-                Options.Password.RequiredLength = 4;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentity<user, IdentityRole>(Options =>
+            //{
+            //    Options.Password.RequireDigit = false;
+            //    Options.Password.RequireLowercase = false;
+            //    Options.Password.RequireUppercase = false;  
+            //    Options.Password.RequireLowercase = false;
+            //    Options.Password.RequireNonAlphanumeric = false;
+            //    Options.Password.RequiredLength = 4;
+            //})
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-            var AppSettingsConfigration = this.Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(AppSettingsConfigration);
+            //var AppSettingsConfigration = this.Configuration.GetSection("AppSettings");
+            //services.Configure<AppSettings>(AppSettingsConfigration);
 
 
-            var AppSettings = AppSettingsConfigration.Get<AppSettings>();
-            var Key = Encoding.ASCII.GetBytes(AppSettings.secret);
+            //var AppSettings = AppSettingsConfigration.Get<AppSettings>();
+            //var Key = Encoding.ASCII.GetBytes(AppSettings.secret);
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddJwtBearer(x =>
+            //{
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Key),
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false
+            //    };
+            //});
 
             // services.AddControllersWithViews();
-            services.AddControllers();
+           // services.AddControllers();
 
         }
 
@@ -100,7 +107,7 @@ namespace CatIstagram.Server
             //app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSwaggerUI();
             app.UseRouting();
 
             app.UseCors(options => options
