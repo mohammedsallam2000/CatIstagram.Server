@@ -71,7 +71,7 @@ namespace CatIstagram.Server.Controllers.Idintity
             var token = this.identityService.GenerateJwtToken(user.Id,user.UserName,this.appSettings.secret);
             return new LoginResponseModel
             {
-                token = token,
+                token = token
             };
         }
     }
