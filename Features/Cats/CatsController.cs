@@ -12,11 +12,11 @@ namespace CatIstagram.Server.Features.Cats
 {
     public class CatsController : ApiController
     {
-        private readonly ICatService catService;
+        private readonly ICatService cat;
 
-        public CatsController(ICatService catService)
+        public CatsController(ICatService cat)
         {
-            this.CatService = catService;
+            this.cat = cat;
         }
 
         public ICatService CatService { get; }
@@ -27,7 +27,7 @@ namespace CatIstagram.Server.Features.Cats
         {
 
             var userId = User.GetId();
-           var catId =  await catService.Create(model, userId);
+           var catId =  await cat.Create(model, userId);
             return Created(nameof(this.Create), catId);
         }
     }

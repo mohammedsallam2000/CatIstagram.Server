@@ -35,7 +35,7 @@ namespace CatIstagram.Server.Controllers.Idintity
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
 
 
-        public async Task<ActionResult> Register(RegisterRequestModel model)
+        public async Task<IActionResult> Register(RegisterRequestModel model)
         {
             var user = new user
             {
